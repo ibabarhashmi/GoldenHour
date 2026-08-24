@@ -3,7 +3,7 @@ export const en = {
   "app.name": "GoldenHour",
   "app.tagline": "First response for cyber fraud",
   "mock.banner":
-    "Demonstration build. Complaint submission, accounts and helplines other than 1930 are mocked.",
+    "Demonstration build. Complaint submission and accounts are mocked; helpline numbers are real and source-linked.",
   "offline.banner": "You're offline. Your case is saved on this phone.",
   "start.over": "Start over",
   "start.over.confirm": "Delete this case and start over?",
@@ -138,9 +138,17 @@ export const en = {
   "bank.rbi.title": "Why these words matter",
   "bank.rbi.body":
     "RBI's limited-liability rules cap what you pay for unauthorised transactions when you report quickly — often within zero to three days depending on your report speed. Saying \"unauthorised\" and asking them to \"invoke zero liability\" puts your case on the right track from the first minute.",
-  "bank.mock.title": "This number is a placeholder",
-  "bank.mock.body":
-    "1800-000-0000 (mock number). Use the number printed on the back of your own card, your bank's app, or its official website.",
+  "bank.verified.title": "Verified contact details",
+  "bank.verified.body":
+    "Numbers and emails below are transcribed from each institution's own website — open the official source link to double-check before you share anything.",
+  "bank.group.bank": "Banks",
+  "bank.group.wallet": "Wallets & payment apps",
+  "bank.group.card": "Card networks",
+  "bank.fraud.label": "Report fraud",
+  "bank.general.label": "General customer care",
+  "bank.email.label": "Email",
+  "bank.source.label": "Official source",
+  "bank.universal.title": "Always-relevant numbers",
   "bank.email.title": "Also send it in writing",
   "bank.email.body":
     "Email the same words to your bank's grievance desk today. A written record starts their response clock.",
@@ -273,12 +281,10 @@ export const en = {
   "about.real.1":
     "All product logic: triage mapping to NCRP's seven financial-fraud sub-categories, the description composer, validation rules mirroring the portal's limits, escalation date maths, bilingual content.",
   "about.real.2":
-    "The only real phone numbers anywhere in this codebase are 1930 and 112. A grep in our build checklist enforces it.",
+    "Bank, wallet and card-network helplines are real numbers transcribed from each institution's own website, with the source linked beside them.",
   "about.mock.title": "Mocked",
   "about.mock.1": "Login accounts (three seeded demo users).",
   "about.mock.2": "Complaint submission — nothing reaches NCRP; acknowledgement numbers begin with 99.",
-  "about.mock.3":
-    "Bank helplines — every seeded number is 1800-000-0000, labelled on screen.",
   "about.mock.4":
     "All identifiers: Aadhaar-shaped numbers fail the UIDAI Verhoeff checksum by construction and are unit-tested to do so.",
   "about.mock.5": "File uploads are validated then discarded. No storage exists.",

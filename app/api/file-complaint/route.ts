@@ -4,6 +4,7 @@ import {
   fileComplaintSchema,
   formatError,
 } from "../../../lib/validation";
+import { clientIp, rateLimit } from "../../../lib/rate-limit";
 
 /**
  * MOCK — nothing reaches the real NCRP. Validates with the exact schema the
@@ -11,6 +12,12 @@ import {
  * acknowledgement number so no one can mistake it for a real one.
  */
 export async function POST(req: Request) {
+  if (!rateLimit(`complaint:${clientIp(req)}`, 10).ok) {
+    return NextResponse.json(
+      formatError("too_many", "Too many requests. Try again shortly."),
+      { status: 429 },
+    );
+  }
   let body: unknown;
   try {
     body = await req.json();

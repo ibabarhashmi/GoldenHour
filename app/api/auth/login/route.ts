@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { timingSafeEqual } from "crypto";
 import { DEMO_ACCOUNTS } from "../../../../data/accounts";
 import { formatError, loginSchema } from "../../../../lib/validation";
+import { clientIp, rateLimit } from "../../../../lib/rate-limit";
 
 const COOKIE = "gh_session";
 const SESSION_VALUE = "gh-demo-session";
@@ -19,6 +20,12 @@ function safeEqual(a: string, b: string): boolean {
 }
 
 export async function POST(req: Request) {
+  if (!rateLimit(`login:${clientIp(req)}`, 10).ok) {
+    return NextResponse.json(
+      formatError("too_many", "Too many attempts. Try again in a minute."),
+      { status: 429 },
+    );
+  }
   let body: unknown;
   try {
     body = await req.json();
@@ -44,6 +51,7 @@ export async function POST(req: Request) {
   const store = await cookies();
   store.set(COOKIE, SESSION_VALUE, {
     httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 8,

@@ -68,5 +68,20 @@ export interface Bank {
   id: string;
   name: string;
   type: "bank" | "wallet" | "card_network";
-  mockFraudLine: string;
+  /** Fraud-reporting lines, transcribed from the institution's own pages. */
+  fraudLines: string[];
+  generalLines: string[];
+  emails: string[];
+  /** Page the details were transcribed from, shown as "official source". */
+  sourceUrl: string;
+  /** Extra instruction or confidence caveat, bilingual. */
+  note?: Record<Lang, string>;
+}
+
+export interface UniversalNumber {
+  id: string;
+  name: Record<Lang, string>;
+  detail?: Record<Lang, string>;
+  lines: string[];
+  url?: string;
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { SCAM_TYPES } from "../../../data/scamTypes";
-import { clientIp, rateLimit } from "../../../lib/rate-limit";
 import { classifyRequestSchema, formatError } from "../../../lib/validation";
+import { clientIp, rateLimit } from "../../../lib/rate-limit";
 
 const KEYWORDS: { id: string; re: RegExp }[] = [
   { id: "sim_swap", re: /\b(sim|सिम)\b|सिम स्वैप/i },

@@ -15,7 +15,6 @@ const REAL = [
 const MOCKED = [
   "about.mock.1",
   "about.mock.2",
-  "about.mock.3",
   "about.mock.4",
   "about.mock.5",
 ] as const;

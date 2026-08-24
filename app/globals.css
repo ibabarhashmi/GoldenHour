@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette: "triage tag" — derived from physical START triage tags,
+     plus a restrained civic blue reserved for links and progress. */
+  --color-ink: #171a20;
+  --color-clinical: #f6f6f3;
+  --color-card: #ffffff;
+  --color-critical: #c81e1e;
+  --color-urgent: #b45309;
+  --color-stable: #15703f;
+  --color-muted: #5b6169;
+  --color-hairline: #dddddd;
+  --color-brand: #1d5eb8;
+
+  /* Type */
+  --font-ui: var(--font-anek-latin), var(--font-anek-deva), system-ui, sans-serif;
+  --font-data: var(--font-plex), ui-monospace, monospace;
+
+  --shadow-card: 0 1px 2px rgb(23 26 32 / 0.06);
+  --shadow-lift: 0 6px 16px -6px rgb(23 26 32 / 0.18);
+}
+
+html {
+  background-color: var(--color-clinical);
+}
+
+body {
+  color: var(--color-ink);
+}
+
+::selection {
+  background-color: #ffe08a;
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- */
+/* Civic primitives — the vocabulary shared by every screen.        */
+/* ---------------------------------------------------------------- */
+
+/* Skip link, revealed on first Tab — standard on government portals. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 50;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 0 0 4px 4px;
+  transition: top 120ms ease-out;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Buttons: solid, square-ish, tactile press — USWDS discipline. */
+.gh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 60ms ease;
+}
+.gh-btn:hover {
+  box-shadow: var(--shadow-card);
+}
+.gh-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.gh-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.gh-btn-primary {
+  background: var(--color-ink);
+  color: #fff;
+}
+.gh-btn-primary:hover:not(:disabled) {
+  background: #000;
+}
+
+.gh-btn-danger {
+  background: var(--color-critical);
+  color: #fff;
+}
+.gh-btn-danger:hover:not(:disabled) {
+  background: #a51818;
+}
+
+.gh-btn-success {
+  background: var(--color-stable);
+  color: #fff;
+}
+.gh-btn-success:hover:not(:disabled) {
+  background: #115733;
+}
+
+.gh-btn-outline {
+  background: var(--color-card);
+  color: var(--color-ink);
+  border-color: #b9bdc4;
+}
+.gh-btn-outline:hover:not(:disabled) {
+  border-color: var(--color-ink);
+}
+
+/* Links look like links — underline is non-negotiable in gov design. */
+.gh-link {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.gh-link:hover {
+  text-decoration-thickness: 2px;
+}
+.gh-link--quiet {
+  color: var(--color-muted);
+}
+.gh-link--quiet:hover {
+  color: var(--color-ink);
+}
+
+/* Cards: white, hairline, quiet shadow; lift only where clickable. */
+.gh-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-hairline);
+  border-radius: 6px;
+  box-shadow: var(--shadow-card);
+}
+.gh-card-hover {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease;
+}
+.gh-card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+  border-color: #b9bdc4;
+}
+.gh-card-hover:active {
+  transform: translateY(0);
+}
+
+/* Micro label chip — uppercase, tracked, muted. */
+.gh-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Tricolour identity strip under the masthead. */
+.gh-tricolor {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    #e8873a 0%,
+    #e8873a 33.4%,
+    #e4e4de 33.4%,
+    #e4e4de 66.7%,
+    #3d8a5f 66.7%
+  );
+}
+
+/* Inputs share one voice. */
+.gh-input {
+  width: 100%;
+  border: 1px solid #b9bdc4;
+  border-radius: 4px;
+  background: #fff;
+  padding: 10px 12px;
+  font-size: 16px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.gh-input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgb(29 94 184 / 0.18);
+}
+
+/* The single signature motion moment: /plan cards stagger in. */
+@keyframes gh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gh-rise {
+  opacity: 0;
+  animation: gh-rise 420ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

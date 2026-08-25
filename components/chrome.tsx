@@ -140,25 +140,40 @@ export function Header() {
 export function Footer() {
   const { t } = useT();
   return (
-    <footer className="mt-auto border-t border-hairline bg-card">
-      <div className="mx-auto w-full max-w-2xl space-y-3 px-4 py-6 text-sm">
-        <a href="tel:1930" className="gh-btn gh-btn-outline h-11 w-full text-base">
-          ☎ 1930
-        </a>
-        <p className="text-xs leading-relaxed text-muted">{t("footer.note")}</p>
-        <div className="flex items-center justify-between border-t border-hairline pt-3">
-          <nav className="flex items-center gap-4" aria-label="Footer">
-            <Link href="/about" className="gh-link gh-link--quiet text-xs">
-              {t("landing.about.link")}
-            </Link>
-            <Link href="/compare" className="gh-link gh-link--quiet text-xs">
-              {t("compare.title")}
-            </Link>
-          </nav>
-          <StartOverButton />
+    <>
+      <footer className="mt-auto border-t border-hairline bg-card">
+        <div className="mx-auto w-full max-w-2xl space-y-3 px-4 py-6 text-sm">
+          <a href="tel:1930" className="gh-btn gh-btn-outline h-11 w-full text-base">
+            ☎ 1930
+          </a>
+          <p className="text-xs leading-relaxed text-muted">{t("footer.note")}</p>
+          <div className="flex items-center justify-between border-t border-hairline pt-3">
+            <nav className="flex items-center gap-4" aria-label="Footer">
+              <Link href="/about" className="gh-link gh-link--quiet text-xs">
+                {t("landing.about.link")}
+              </Link>
+              <Link href="/compare" className="gh-link gh-link--quiet text-xs">
+                {t("compare.title")}
+              </Link>
+            </nav>
+            <StartOverButton />
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+      <footer className="site-footer">
+        <p>
+          Built by{" "}
+          <a
+            href="https://github.com/ibabarhashmi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="creator-link"
+          >
+            Babar Hashmi
+          </a>
+        </p>
+      </footer>
+    </>
   );
 }
 

@@ -226,6 +226,38 @@ body {
   animation: gh-rise 420ms ease-out forwards;
 }
 
+.site-footer {
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.creator-link {
+  color: var(--color-ink);
+  text-decoration: none;
+  position: relative;
+}
+
+.creator-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.creator-link:hover::after,
+.creator-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

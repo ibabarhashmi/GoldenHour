@@ -52,7 +52,7 @@ export function GoldenHourBand({ fraudAt }: { fraudAt: number }) {
         phase ? PHASE_STYLES[phase] : "bg-card text-ink"
       }`}
     >
-      <div suppressHydrationWarning className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-2xl">
         {remaining === null || phase === null ? (
           <>
             <p className="tnum font-data text-[64px] font-medium leading-none tracking-tight text-muted" aria-hidden>

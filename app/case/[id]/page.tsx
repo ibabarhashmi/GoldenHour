@@ -1,11 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Container } from "../../../components/chrome";
 import { EscalationLadder } from "../../../components/EscalationLadder";
-import { formatDate, formatDateTime } from "../../../lib/clock";
-import { formatRs } from "../../../lib/compose";
+import { formatDate } from "../../../lib/clock";
 import { useCase } from "../../../lib/case-store";
 import { useT } from "../../../lib/use-t";
 
@@ -13,6 +13,28 @@ export default function CasePage() {
   const { t, lang } = useT();
   const params = useParams<{ id: string }>();
   const c = useCase();
+  const [display, setDisplay] = useState<{ date: string; amount: string } | null>(null);
+
+  useEffect(() => {
+    if (!c) return;
+    setDisplay({
+      date: new Intl.DateTimeFormat(lang === "hi" ? "hi-IN" : "en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }).format(new Date(c.fraudAt)),
+      amount: c.amount != null
+        ? new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0,
+          }).format(c.amount)
+        : "",
+    });
+  }, [c, c?.fraudAt, c?.amount, lang]);
 
   if (!c || c.id !== params.id) {
     return (
@@ -52,9 +74,9 @@ export default function CasePage() {
         {c.id}
       </h1>
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-        <span suppressHydrationWarning>{formatDateTime(c.fraudAt, lang)}</span>
+        <span>{display ? display.date : <span className="inline-block w-48">&nbsp;</span>}</span>
         {c.amount != null && (
-          <span className="tnum font-data">Rs {formatRs(c.amount)}</span>
+          <span className="tnum font-data">{display ? display.amount : <span className="inline-block w-24">&nbsp;</span>}</span>
         )}
         <span
           className={`rounded-sm border px-2 py-0.5 text-[11px] font-semibold ${
@@ -136,7 +158,7 @@ export default function CasePage() {
                   }`}
                 />
                 <div className="text-sm leading-snug">
-                  <span suppressHydrationWarning className="mr-2 tnum font-data text-xs text-muted">
+                  <span className="mr-2 tnum font-data text-xs text-muted">
                     {formatDate(ev.at, lang)}
                   </span>
                   {ev.label[lang]}

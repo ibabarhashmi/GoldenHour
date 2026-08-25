@@ -284,9 +284,11 @@ export const en = {
   "about.real.1":
     "All product logic: triage mapping to NCRP's seven financial-fraud sub-categories, the description composer, validation rules mirroring the portal's limits, escalation date maths, bilingual content.",
   "about.real.2":
-    "Bank, wallet and card-network helplines are real numbers transcribed from each institution's own website, with the source linked beside them.",
+    "Sessions are cryptographically signed and verified on every protected request. Demo accounts are pre-seeded for judging. Passwords are never logged. Case data never leaves your device.",
+  "about.real.3":
+    "Bank, wallet and card-network helplines are real numbers sourced from each institution's own website, with the source linked beside them.",
   "about.mock.title": "Mocked",
-  "about.mock.1": "Login accounts (three seeded demo users).",
+  "about.mock.1": "Login accounts are pre-seeded demo users with signed sessions.",
   "about.mock.2": "Complaint submission — nothing reaches NCRP; acknowledgement numbers begin with 99.",
   "about.mock.4":
     "All identifiers: Aadhaar-shaped numbers fail the UIDAI Verhoeff checksum by construction and are unit-tested to do so.",

@@ -1,4 +1,5 @@
 import { strict as assert } from "node:assert";
+import { signSession, verifySession } from "../lib/session.ts";
 import { test } from "node:test";
 import { fakeAadhaar, fakePan, fakeUtr, mockAckNo, verhoeffValid } from "../lib/synthetic.ts";
 
@@ -39,4 +40,23 @@ test("acknowledgement numbers are 14 digits starting 99", () => {
     assert.match(a, /^\d{14}$/);
     assert.ok(a.startsWith("99"), "99 prefix is the visible mock tell");
   }
+});
+
+test("rejects a tampered session cookie", async () => {
+  const token = await signSession("demo@goldenhour.in");
+  const tampered = token.slice(0, -1) + (token.at(-1) === "A" ? "B" : "A");
+  const result = await verifySession(tampered);
+  assert.strictEqual(result, null);
+});
+
+test("rejects a malformed token", async () => {
+  const result1 = await verifySession("garbage");
+  const result2 = await verifySession(undefined);
+  assert.strictEqual(result1, null);
+  assert.strictEqual(result2, null);
+});
+
+test("accepts a valid token", async () => {
+  const result = await verifySession(await signSession("u1"));
+  assert.deepStrictEqual(result, { uid: "u1" });
 });

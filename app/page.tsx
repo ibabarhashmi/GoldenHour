@@ -95,7 +95,7 @@ export default function Landing() {
           </ol>
         </section>
 
-        <p className="sr-only" suppressHydrationWarning>
+        <p className="sr-only">
           {lang === "hi" ? "भाषा: हिंदी" : "Language: English"}
         </p>
       </div>

@@ -47,6 +47,7 @@ export function NcrpMirrorForm({
   const [serverError, setServerError] = useState<string | null>(null);
   const [ack, setAck] = useState<{ no: string; at: number } | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [fileNames, setFileNames] = useState<{ id?: string; evidence?: string }>({});
 
   const [fields, setFields] = useState({
     state: "",
@@ -373,28 +374,68 @@ export function NcrpMirrorForm({
                 />
               </Field>
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium">
-                <span>{t("report.upload.id")}</span>
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png"
-                  className="mt-1 block w-full text-sm"
-                  onChange={(e) => checkFile(e.currentTarget, MAX_ID, "uploadId")}
-                />
-              </label>
-              <label className="block text-sm font-medium">
-                <span>{t("report.upload.evidence")}</span>
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png"
-                  multiple
-                  className="mt-1 block w-full text-sm"
-                  onChange={(e) => checkFile(e.currentTarget, MAX_EVIDENCE, "uploadEvidence")}
-                />
-              </label>
-              <p className="text-xs text-muted">{t("report.upload.note")}</p>
-            </div>
+            <fieldset className="rounded-md border-2 border-dashed border-muted/40 bg-clinical/30 p-4 pt-3">
+              <legend className="px-1 text-sm font-semibold">{t("report.upload.title")}</legend>
+              <p className="mb-3 text-xs leading-snug text-muted">{t("report.upload.note")}</p>
+              <div className="space-y-2">
+                {([
+                  { key: "id" as const, label: t("report.upload.id"), hint: t("report.upload.hint.id"), errKey: "uploadId", accept: "image/jpeg,image/png", max: MAX_ID },
+                  { key: "evidence" as const, label: t("report.upload.evidence"), hint: t("report.upload.hint.evidence"), errKey: "uploadEvidence", accept: "image/jpeg,image/png", max: MAX_EVIDENCE },
+                ] as const).map((row) => (
+                  <label
+                    key={row.key}
+                    className={`gh-card flex min-h-12 cursor-pointer items-center gap-3 px-3 py-2 transition-colors ${
+                      errors[row.errKey]
+                        ? "border-critical"
+                        : fileNames[row.key]
+                          ? "border-stable"
+                          : "hover:border-muted"
+                    }`}
+                  >
+                    <input
+                      type="file"
+                      accept={row.accept}
+                      multiple={row.key === "evidence"}
+                      className="sr-only"
+                      onChange={(e) => {
+                        const input = e.currentTarget;
+                        if (row.key === "id") {
+                          setFileNames((n) => ({ ...n, id: input.files?.[0]?.name }));
+                        } else {
+                          const count = input.files?.length ?? 0;
+                          setFileNames((n) => ({
+                            ...n,
+                            evidence: count > 0
+                              ? `${count} file${count > 1 ? "s" : ""}`
+                              : undefined,
+                          }));
+                        }
+                        checkFile(input, row.max, row.errKey);
+                      }}
+                    />
+                    <span
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-sm text-xs font-semibold ${
+                        fileNames[row.key]
+                          ? "bg-stable/10 text-stable"
+                          : "bg-muted/10 text-muted"
+                      }`}
+                    >
+                      {fileNames[row.key] ? "✓" : row.key === "id" ? "ID" : "E"}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium truncate">
+                        {fileNames[row.key] || row.label}
+                      </p>
+                      {errors[row.errKey] ? (
+                        <p className="text-xs text-critical">{errors[row.errKey]}</p>
+                      ) : (
+                        <p className="text-xs text-muted">{row.hint}</p>
+                      )}
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           </>
         )}
 

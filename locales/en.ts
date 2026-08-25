@@ -213,8 +213,11 @@ export const en = {
   "report.field.idnumber": "Identity number",
   "report.id.synthetic":
     "Sample value, generated to be provably invalid. Never enter a real ID in any demo.",
-  "report.upload.evidence": "Upload evidence (JPEG/PNG, max 10 MB)",
-  "report.upload.id": "Upload ID (JPEG/PNG, max 5 MB)",
+  "report.upload.evidence": "Transaction evidence",
+  "report.upload.id": "Identity document",
+  "report.upload.title": "Attachments",
+  "report.upload.hint.id": "JPG or PNG · up to 5 MB",
+  "report.upload.hint.evidence": "JPG or PNG · up to 10 MB",
   "report.upload.note":
     "Files are checked against the portal's real limits, then discarded. Nothing is uploaded anywhere.",
   "report.declaration":

@@ -215,8 +215,11 @@ export const hi: Record<keyof typeof en, string> = {
   "report.field.idnumber": "पहचान संख्या",
   "report.id.synthetic":
     "नमूना मान, जानबूझकर अवैध सिद्ध होने वाला. किसी भी डेमो में असली ID न डालें.",
-  "report.upload.evidence": "साक्ष्य अपलोड करें (JPEG/PNG, अधिकतम 10 MB)",
-  "report.upload.id": "पहचान अपलोड करें (JPEG/PNG, अधिकतम 5 MB)",
+  "report.upload.evidence": "लेन-देन का साक्ष्य",
+  "report.upload.id": "लेन-देन का साक्ष्य",
+  "report.upload.title": "संलग्नक",
+  "report.upload.hint.id": "JPG या PNG · अधिकतम 5 MB",
+  "report.upload.hint.evidence": "JPG या PNG · अधिकतम 10 MB",
   "report.upload.note":
     "फ़ाइल पोर्टल की असली सीमाओं पर जाँची जाती है, फिर हटा दी जाती है. कहीं अपलोड नहीं होती.",
   "report.declaration":

@@ -270,6 +270,16 @@ export default function BankPage() {
           >
             {c.actions.bank === "done" ? t("plan.done") + " ✓" : t("bank.markdone")}
           </button>
+
+          <a
+            href="/plan/report"
+            className="gh-btn gh-btn-primary mt-3 h-14 w-full px-5 text-base"
+          >
+            <span className="flex-1 truncate text-left">
+              {c.actions.ncrp === "done" && <span aria-hidden className="mr-1.5 text-stable">✓</span>}
+              {t("plan.card.ncrp.title")} →
+            </span>
+          </a>
         </>
       ) : (
         <p className="mt-6 rounded-sm bg-card border border-hairline p-4 text-sm text-muted">

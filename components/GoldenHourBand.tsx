@@ -94,7 +94,7 @@ export function GoldenHourBand({ fraudAt }: { fraudAt: number }) {
           </>
         )}
 
-        <p className="mt-3 text-sm leading-snug" aria-live="polite">
+        <p className={phase === "passed" ? "sr-only" : "mt-3 text-sm leading-snug"} aria-live="polite">
           {liveLine}
         </p>
       </div>

@@ -10,10 +10,10 @@ export const metadata = {
 const REAL = [
   "about.real.1",
   "about.real.2",
+  "about.real.3",
 ] as const;
 
 const MOCKED = [
-  "about.mock.1",
   "about.mock.2",
   "about.mock.4",
   "about.mock.5",
@@ -114,8 +114,7 @@ export default function AboutPage() {
       </section>
 
       <p className="mt-6 rounded-sm bg-clinical px-4 py-3 text-center text-xs font-medium text-muted">
-        Recovery percentages vary by source and case. We deliberately avoid
-        precise odds.
+        We securely store emails and scrypt password hashes; passwords are never logged, and case data never leaves the device. Recovery percentages vary by source and case. We deliberately avoid precise odds.
       </p>
     </Container>
   );

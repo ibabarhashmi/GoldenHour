@@ -32,7 +32,6 @@ export function Stopwatch() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <p
-        suppressHydrationWarning
         className="tnum min-w-44 rounded-sm bg-ink px-4 py-2 font-data text-4xl text-clinical"
         role="timer"
       >

@@ -4,6 +4,7 @@ import { timingSafeEqual } from "crypto";
 import { DEMO_ACCOUNTS } from "../../../../data/accounts";
 import { formatError, loginSchema } from "../../../../lib/validation";
 import { clientIp, rateLimit } from "../../../../lib/rate-limit";
+import { signSession } from "@/lib/session";
 
 const COOKIE = "gh_session";
 const SESSION_VALUE = "gh-demo-session";
@@ -49,12 +50,12 @@ export async function POST(req: Request) {
     );
   }
   const store = await cookies();
-  store.set(COOKIE, SESSION_VALUE, {
+  (await cookies()).set('gh_session', await signSession(match.email), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 8,
+    maxAge: 30 * 24 * 60 * 60,
   });
   return new NextResponse(null, { status: 204 });
 }

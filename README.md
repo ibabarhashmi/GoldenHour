@@ -12,7 +12,7 @@
 | `partner@demo.in` | `demo1234` |
 | `victim@demo.in` | `demo1234` |
 
-The same credentials are printed on `/login`. Login is **mocked** — nothing is stored server-side.
+The same credentials are printed on `/login`. Sessions are HMAC-signed and verified in middleware on every protected request. Demo accounts are pre-seeded for judging.
 
 ## What this is
 

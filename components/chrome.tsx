@@ -51,7 +51,7 @@ export function LangToggle({ className = "" }: { className?: string }) {
     <button
       type="button"
       onClick={() => setLang(next)}
-      className={`gh-btn gh-btn-outline h-10 min-w-24 px-3 text-sm ${className}`}
+      className={`gh-btn gh-btn-outline h-11 min-w-24 px-3 text-sm ${className}`}
       aria-label={next === "hi" ? "Switch language to Hindi" : "भाषा बदलें English"}
     >
       <span aria-hidden>🌐</span>

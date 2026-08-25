@@ -269,7 +269,6 @@ export function DescriptionComposer({
           <h3 className="text-sm font-semibold">{t("report.preview")}</h3>
           <p
             aria-live="polite"
-            suppressHydrationWarning
             className={`tnum font-data text-sm ${
               ok ? "text-stable" : "font-semibold text-critical"
             }`}
